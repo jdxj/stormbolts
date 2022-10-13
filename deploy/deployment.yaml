@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stormbolts-dep
+  namespace: stormbolts
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stormbolts
+  template:
+    metadata:
+      name: stormbolts-temp
+      labels:
+        app: stormbolts
+    spec:
+      containers:
+        - name: stormbolts-c
+          image: jdxj/stormbolts:test-c0e4bff
+          command: [ "/stormbolts/stormbolts.out" ]
+          args: [ "-dir", "/stormbolts/conf.d", "-port", "30083" ]
+          volumeMounts:
+            - mountPath: /stormbolts/conf.d
+              name: stormbolts-conf
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+      volumes:
+        - name: stormbolts-conf
+          secret:
+            secretName: stormbolts-conf
