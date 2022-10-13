@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: stormbolts-c
-          image: jdxj/stormbolts:test-c0e4bff
+          image: jdxj/stormbolts:test-cf2cd0e
           command: [ "/stormbolts/stormbolts.out" ]
           args: [ "-dir", "/stormbolts/conf.d", "-port", "30083" ]
           volumeMounts:
