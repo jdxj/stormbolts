@@ -29,5 +29,6 @@ spec:
                   fieldPath: metadata.name
       volumes:
         - name: stormbolts-conf
-          secret:
-            secretName: stormbolts-conf
+          hostPath:
+            path: /home/tmp/stormbolts
+            type: Directory
